@@ -15,13 +15,13 @@ Welcome to GNU Parted! Type 'help' to view a list of commands.
 (parted)
 ```
 
-  Print the partition table
+Print the partition table
   
-  ```text
-  (parted) print
-  ```
+```text
+(parted) print
+```
   
-  *your output should look similar*
+*your output should look similar*
 
 ```text
 (parted) print
@@ -53,8 +53,10 @@ Number  Start   End     Size    Type     File system     Flags
   **Next we need to create a new partition**
 
   ```text
-  (parted) mkpart primary btrfs START END
+  (parted) mkpart primary btrfs 100GB 256GB
   ```
+  
+  **toggle any flags you need or don't need**
   
   ```text
   (parted) toggle <#> FLAG on/off
