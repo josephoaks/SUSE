@@ -31,12 +31,26 @@ cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
 ## Using Helm to install jetstack/cert-manager and Rancher
 
 ### Add the repos to Helm
-```helm repo add jetstack https://charts.jetstack.io```
-```helm fetch jetstack/cert-manager --version v1.6.1```
 
-```helm repo add rancher-latest https://releases.rancher.com/server-charts/latest```
-```helm fetch rancher-latest/rancher --version=v2.6.2```
-```helm repo update```
+```text
+helm repo add jetstack https://charts.jetstack.io
+```
+
+```text
+helm fetch jetstack/cert-manager --version v1.6.1
+```
+
+```text
+helm repo add rancher-latest https://releases.rancher.com/server-charts/latest
+```
+
+```text
+helm fetch rancher-latest/rancher --version=v2.6.2
+```
+
+```text
+helm repo update
+```
 
 ### Install cert-manager
 
