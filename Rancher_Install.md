@@ -34,17 +34,12 @@ cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
 
 ```text
 helm repo add jetstack https://charts.jetstack.io
-```
-
-```text
-helm fetch jetstack/cert-manager --version v1.6.1
-```
-
-```text
 helm repo add rancher-latest https://releases.rancher.com/server-charts/latest
 ```
 
+*Check for latest versions and adjust as needed*
 ```text
+helm fetch jetstack/cert-manager --version v1.6.1
 helm fetch rancher-latest/rancher --version=v2.6.2
 ```
 
