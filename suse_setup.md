@@ -31,7 +31,10 @@ passwd <username>
 ### Setup SUDO to allow the user to get to root without the need of a password
 
 *Create and edit the /etc/suders.d/<username> and insert the following*
-```<username> ALL=(ALL) NOPASSWD:ALL```
+
+```text
+<username> ALL=(ALL) NOPASSWD:ALL
+```
 
 ### Using YAST setup the following to your needs
 
