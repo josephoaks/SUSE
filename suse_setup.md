@@ -11,8 +11,18 @@ SUSEConnect -p PackageHub/15.3/x86_64 (aarch64)
 
 ```text
 zypper ref;zypper up -y;zypper in -y -t pattern yast2_basis
-zypper in -y sudo which curl nmap git-core bash-completion bind-utils k9s apparmor-parser
+zypper in -y \
+  sudo \
+  which \
+  curl \
+  nmap \
+  git-core \
+  bash-completion \
+  bind-utils \
+  k9s \
+  apparmor-parser
 ```
+*Adjust the apps to your needs/wants*
 
 ### Set hostname and configure firewalld (or disable it)
 
