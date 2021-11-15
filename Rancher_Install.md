@@ -13,9 +13,11 @@
 
 ## Install Helm
 
+```text
 wget -O helm.tar.gz https://get.helm.sh/helm-v3.6.3-linux-amd64.tar.gz
 tar xfz helm-v3.6.3-linux-amd64.tar.gz
 cp linux-amd64/helm /usr/local/bin
+```
 
 ## Install Kubernetes (K3S)
 
