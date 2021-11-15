@@ -9,7 +9,7 @@
 1. Setup region and time server
 1. New with Kubernetes 1.20.x install apparmor if it is not already installed
 
-*[See suse_setup.md](suse_setup.md)
+*See [suse_setup.md](suse_setup.md)
 
 ## Install Helm
 
