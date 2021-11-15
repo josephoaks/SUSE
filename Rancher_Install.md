@@ -19,7 +19,7 @@ cp linux-amd64/helm /usr/local/bin
 
 ## Install Kubernetes (K3S)
 
-Use this command to grab the current version of K3S, if you want to specify a version add `INSTALL_K3S_VERSION=<version>` prior to the `sh -`
+Use this command to grab the current version of K3S, to specify a version, add `INSTALL_K3S_VERSION=<version>` prior to the `sh -`
 
 ```text
 curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE=0644 sh -
