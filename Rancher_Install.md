@@ -67,5 +67,6 @@ helm install rancher rancher-latest/rancher \
   --namespace cattle-system \
   --create-namespace \
   --set hostname=<fqdn> \
+  --set replicas=1 \
   --set bootstrapPassword=<password>
 ```
