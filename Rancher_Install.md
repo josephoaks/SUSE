@@ -27,6 +27,10 @@ Use this command to grab the current version of K3S, to specify a version, add `
 curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE=0644 sh -
 ```
 
+```text
+curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE=0644 INSTALL_K3S_VERSION=v1.21.5+k3s2 sh -
+```
+
 Copy your K3S config to your local directory
 ```text
 cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
