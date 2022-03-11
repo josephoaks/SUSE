@@ -3,7 +3,7 @@
 1. `sudo zypper in SUSEConnect`
 1. `sudo SUSEConnect -r <CODE> -p SLES/15.3/x86_64`
 1. `SUSEConnect -p sle-module-basesystem/15.3/x86_64`
-1. `zypper lr`
+1. `zypper lr --url`
   this will list all the repositories, you will need to remove any that are associated with openSUSE
 1. `zypper rr #` from the previous command list output
 1. `sudo zypper dup --force-resolution`
