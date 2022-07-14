@@ -89,8 +89,10 @@ Again you can verify your partitions with `fdisk -l`
 
 Now to configure the partition with `ext4` filesystem (or your filesystem of choice) and lable it.
 
-`mkfs.ext4 /dev/sdb3`
-`e2label /dev/sdb3 ignition`
+```txt
+mkfs.ext4 /dev/sdb3
+e2label /dev/sdb3 ignition
+```
 
 Next we are going to mount the new partition and setup our script for the initial boot
 
