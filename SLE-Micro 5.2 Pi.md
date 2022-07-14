@@ -52,9 +52,11 @@ End?  [200GB]? 200GB
 ```
 
 Depending on the file system of partition 2 `btrfs` `Linux` etc... we can resize similar to this
-`mount /dev/sdb2 /mnt`
-`btrfs filesystem resize max /mnt`
-`umount /mnt`
+```text
+mount /dev/sdb2 /mnt
+btrfs filesystem resize max /mnt
+umount /mnt
+```
 
 Now we are ready to make our third parition for `combustion` *this will be the part that allows us to set things like the password*
 
@@ -92,8 +94,10 @@ Now to configure the partition with `ext4` filesystem (or your filesystem of cho
 
 Next we are going to mount the new partition and setup our script for the initial boot
 
-`mount /dev/sdb3 /mnt`
-`mkdir -p /mnt/combustion`
+```text
+mount /dev/sdb3 /mnt
+mkdir -p /mnt/combustion
+```
 
 Next we are going to setup a `script` file in the `/mnt/combustion` directory, to get a password for root, we need to create a hash using
 
