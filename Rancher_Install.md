@@ -28,7 +28,7 @@ curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE=0644 sh -
 ```
 
 ```text
-curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE=0644 INSTALL_K3S_VERSION=v1.21.5+k3s2 sh -
+curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE=0644 INSTALL_K3S_VERSION=v1.23.8+k3s1 sh -
 ```
 
 Copy your K3S config to your local directory
@@ -47,8 +47,8 @@ helm repo add rancher-latest https://releases.rancher.com/server-charts/latest
 
 *Check for latest versions and adjust as needed*
 ```text
-helm fetch jetstack/cert-manager --version v1.6.1
-helm fetch rancher-latest/rancher --version=v2.6.2
+helm fetch jetstack/cert-manager --version v1.9.1
+helm fetch rancher-latest/rancher --version=v2.6.6
 ```
 
 ```text
