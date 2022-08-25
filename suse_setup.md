@@ -21,7 +21,9 @@ zypper in -y \
   bind-utils \
   k9s \
   apparmor-parser \
-  vim
+  vim \
+  vim-data \
+  vim-data-common
 ```
 *Adjust the apps to your needs/wants*
 
