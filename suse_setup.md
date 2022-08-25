@@ -20,7 +20,8 @@ zypper in -y \
   bash-completion \
   bind-utils \
   k9s \
-  apparmor-parser
+  apparmor-parser \
+  vim
 ```
 *Adjust the apps to your needs/wants*
 
