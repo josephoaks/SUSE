@@ -14,4 +14,4 @@ SERVER='https://pi.pirate.com:6443'
 HOSTNAME=`/usr/bin/hostname -f`
 K3S='v1.23.8+k3s1'
 
-curl -sfL https://get.k3s.io | K3S_TOKEN="$TOKEN" K3S_URL="$SERVER:6443" K3S_NODE_NAME="$HOSTNAME" INSTALL_K3S_VERSION="$K3S" sh -
+curl -sfL https://get.k3s.io | K3S_TOKEN=$TOKEN K3S_NODE_NAME=$HOSTNAME INSTALL_K3S_VERSION=$K3S sh -s - agent --server $SERVER
