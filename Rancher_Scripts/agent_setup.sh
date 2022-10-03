@@ -1,12 +1,14 @@
 #!/bin/sh
 
 # Clean-up to re-install
-/usr/local/bin/k3s-agent-uninstall.sh
-rm -rf /etc/rancher
-rm -rf /var/lib/rancher
+file='/usr/local/bin/k3s-agent-uninstall.sh'
+if [ -f $file ]; then
+  /usr/local/bin/k3s-agent-uninstall.sh
+  rm -rf /etc/rancher
+  rm -rf /var/lib/rancher
+fi
 
 # Install fresh
-
 TOKEN=`/usr/bin/cat node-token`
 SERVER='https://pi.pirate.com'
 HOSTNAME=`/usr/bin/hostname -f`
