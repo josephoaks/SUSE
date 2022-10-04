@@ -9,7 +9,7 @@ if [ -f '/usr/local/bin/k3s-uninstall.sh' ]; then
   /usr/local/bin/k3s-uninstall.sh
   rm -rf /var/lib/rancher
   rm -rf /etc/rancher
-  rm -rf /root/.kube/config
+  rm -f /root/.kube/config
 fi
 
 # Variable initialization
@@ -54,6 +54,7 @@ if [ -f "/usr/local/bin/k3s-agent-uninstall.sh" ]; then
   /usr/local/bin/k3s-agent-uninstall.sh
   rm -rf /etc/rancher
   rm -rf /var/lib/rancher
+  rm -f /root/node-token
 fi
 
 # Install fresh
