@@ -63,7 +63,7 @@ EOF
 # End of Agent Setup Script #
 #############################
 
-  scp .agent_setup${details[$i]}.sh root@${details[$i]}:/root/agent_setup.sh;
+  scp .agent_setup${details[$i]}.sh root@${details[$i]}:/root/agent_setup.sh
   ssh root@${details[$i]} '/bin/sh /root/agent_setup.sh'
   rm -f .agent_setup${details[$i]}.sh
 done
