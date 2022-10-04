@@ -14,7 +14,7 @@ fi
 
 # Variable initialization
 SERVER=`hostname -f`
-read -ep "Enter K3S version you wish to install (v1.23.8+k3s1): " K3S
+read -ep "Enter K3S version you wish to install e.g. (v1.23.8+k3s1): " K3S
 
 # Install fresh
 dir='/root/.kube'
