@@ -141,3 +141,26 @@ Now you are ready to boot your Raspberry Pi
 *If you configure your SUSEConnect to register on initial boot, it will more than likely fail due to Pi's not having an RTC*
 
 ### a lot of this can be seen from the [SUSE-AT-HOME](https://github.com/SUSE/suse-at-home/blob/main/install/Install-Slemicro-K3S-onRPi.md) github page where they show even more with K3S
+
+# Deploying a simple webserver
+SSH into the SLE Micro, and setup a www directory
+```text
+mkdir -p /srv/www/htdocs
+```
+You can put any html in here like a simple index.html file
+```text
+<html>
+<h1>Hello World</h1>
+</html>
+```
+
+Deploy a webserver container using podman
+```text
+podman run -d --name nginx:latest -p 80:80 -v /srv/www/htdocs:/usr/share/nginx/html/
+```
+
+Test the container
+```text
+podman ps
+```
+Open a browser and browse to the http of the server
