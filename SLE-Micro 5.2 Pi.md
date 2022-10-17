@@ -142,6 +142,12 @@ Now you are ready to boot your Raspberry Pi
 
 ### a lot of this can be seen from the [SUSE-AT-HOME](https://github.com/SUSE/suse-at-home/blob/main/install/Install-Slemicro-K3S-onRPi.md) github page where they show even more with K3S
 
+# Register System / List extensions
+```text
+SUSEConnect -r <registration>
+transactional-update register -p PackageHub/15.3/aarch64
+```
+
 # Deploying a simple webserver
 SSH into the SLE Micro, and setup a www directory
 ```text
