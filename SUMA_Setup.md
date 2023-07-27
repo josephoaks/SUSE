@@ -36,3 +36,19 @@ very large very quickly*
 Once you have got that, just click through the installer screens and let it install the OS.
 
 ## Setup of SUSE Manager
+
+*Ensure hostname is set, `yast susemanager_setup` will fail if the <fqdn> is not setup correctly.*
+
+Step 1: run `yast susemanager_setup`
+Step 2: choose either from scratch or migrate, for this we will setup from scratch
+Step 3: set the administrator email address
+Step 4: certificate setup
+Step 5: setup the database user/password (after this it will run the setup)
+Step 6: visit the URL that is presented (usually the https://<fqdn>) and setup your administrator account
+        and continue the setup and configuration of SUMA
+
+## Configuration of SUSE Manager
+Step 1: setup the organization and set the administrator user/password
+
+Your SUMA server is now ready to be used, from here there are several ways to go about setting up and
+using SUMA.
