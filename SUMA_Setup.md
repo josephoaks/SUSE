@@ -48,7 +48,8 @@ Once you have got that, just click through the installer screens and let it inst
 
 
 ## Configuration of SUSE Manager
-Step 1: setup the organization and set the administrator user/password
+1. set up the organization and set the administrator user/password
+2. add product via Admin -> Setup Wizard -> Products
 
 Your SUMA server is now ready to be used, from here there are several ways to go about setting up and
 using SUMA.
