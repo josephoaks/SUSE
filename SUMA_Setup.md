@@ -39,8 +39,7 @@ Once you have got that, just click through the installer screens and let it inst
 
 *Ensure hostname is set, `yast susemanager_setup` will fail if the <fqdn> is not setup correctly.*
 
-<code>
-Step 1: run `yast susemanager_setup`<br>
+<code>Step 1: run `yast susemanager_setup`<br>
 Step 2: choose either from scratch or migrate, for this we will setup from scratch<br>
 Step 3: set the administrator email address<br>
 Step 4: certificate setup<br>
