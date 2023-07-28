@@ -49,7 +49,11 @@ Once you have got that, just click through the installer screens and let it inst
 
 ## Configuration of SUSE Manager
 1. set up the organization and set the administrator user/password
-2. add product via Admin -> Setup Wizard -> Products
+2. set up Organization Credentials, this allows the next step to know which products you have access to via the SCC
+3. add product via Admin -> Setup Wizard -> Products
 
 Your SUMA server is now ready to be used, from here there are several ways to go about setting up and
 using SUMA.
+
+Once your products are mirrored, you are ready to setup Content Lifecycle, Bootstrap Scripts, add hosts
+to manage, setup repositories, images etc.
