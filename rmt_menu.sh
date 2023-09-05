@@ -5,8 +5,8 @@
 
 if [ "$#" -lt 3 ]; then
   echo "Usage: $0 <product> <release> <arch>"
-  echo "  Product Options: SLES SLED"
-  echo "  Release Options: 15, 12, 11"
+  echo "  Product Options: SLES SLED LTSS LivePatch SUMA Micro"
+  echo "  Release Options: 15, 12, 11, (5 for Micro) (4 for SUMA)"
   echo "  Architecture Options: x86_64, aarch64, s390x, ppc64le, amd64, ia64, i386, i486, i586, i686, ppc64, s390, ppc"
   exit 1
 fi
@@ -15,10 +15,19 @@ fi
 prod="$1"
 rel="$2"
 arch="$3"
-if [ $prod == "SLES" ]; then
-  product="SUSE Linux Enterprise Server"
-  else
+
+if [ $prod == "SLED" ]; then
   product="SUSE Linux Enterprise Desktop"
+elif [ $prod == "Micro" ]; then
+  product="SUSE Linux Enterprise Micro"
+elif [ $prod == "LTSS" ]; then
+  product="SUSE Linux Enterprise Server LTSS"
+elif [ $prod == "LivePatch" ]; then
+  product="SUSE Linux Enterprise Server Live Patching"
+elif [ $prod == "SUMA" ]; then
+  product="SUSE Manager Server"
+else
+  product="SUSE Linux Enterprise Server"
 fi
 
 # Define the Service Pack versions
