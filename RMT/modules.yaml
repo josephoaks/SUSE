@@ -48,18 +48,26 @@ SUSE Linux Enterprise Server:
     
 SUSE Linux Enterprise Desktop:
   default:
+    - Basesystem Module 15 SP5 x86_64: SUSEConnect -d -p sle-module-basesystem/15.5/x86_64
+    - Desktop Applications Module 15 SP5 x86_64: sle-module-desktop-applications/15.5/x86_64
+    - SUSE Linux Enterprise Workstation Extension 15 SP5 x86_64: SUSEConnect -d -p sle-we/15.5/x86_64
+    - Python 3 Module 15 SP5 x86_64: sle-module-python3/15.5/x86_64
+    - SUSE Package Hub 15 SP5 x86_64: PackageHub/15.5/x86_64
 
   optional:
-
+    - Development Tools Module 15 SP5 x86_64: sle-module-development-tools/15.5/x86_64
+    - Certifications Module 15 SP5 x86_64: sle-module-certifications/15.5/x86_64
+    
   subscription:
 
 SUSE Linux Enterprise Micro:
   default:
-
+    - SUSE Package Hub 15 SP4 x86_64: transactional-update register -p PackageHub/15.4/x86_64
+  
   optional:
 
   subscription:
-    
+    - SUSE Linux Enterprise Live Patching 15 SP4 x86_64: sle-module-live-patching/15.4/x86_64 -r <ADDITIONAL REGCODE>
   
 
     
