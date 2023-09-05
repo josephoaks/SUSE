@@ -54,10 +54,10 @@ handle_input() {
       selected_option="${options[choice - 1]}"
       if [ "$selected_option" == "15" ]; then
         echo "Selected: $product ${#options[i]} $arch"
-        rmt-cli products list | egrep "$product\s+\|.*$selected_option.*$arch" | awk -F '| ' '{printf "%s ",$2}'
+        rmt-cli products enable | egrep "$product\s+\|.*$selected_option.*$arch" | awk -F '| ' '{printf "%s ",$2}'
       else
         echo "Selected: $product $selected_option $arch"
-        rmt-cli products list | egrep "$product\s+\|.*$selected_option.*$arch" | awk -F '| ' '{printf "%s ",$2}'
+        rmt-cli products enable | egrep "$product\s+\|.*$selected_option.*$arch" | awk -F '| ' '{printf "%s ",$2}'
       fi
       ;;
     q)
