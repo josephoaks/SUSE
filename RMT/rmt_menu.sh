@@ -12,23 +12,20 @@ fi
 prod="$1"
 rel="$2"
 arch="$3"
+rmte="rmt-cli product enable"
+rmtl="rmt-cli product list --all"
 
-if [ $prod == "SLED" ]; then
-  product="SUSE Linux Enterprise Desktop"
-elif [ $prod == "Micro" ]; then
-  product="SUSE Linux Enterprise Micro"
-elif [ $prod == "LTSS" ]; then
-  product="SUSE Linux Enterprise Server LTSS"
-elif [ $prod == "LivePatch" ]; then
-  product="SUSE Linux Enterprise Server Live Patching"
-elif [ $prod == "SUMA" ]; then
-  product="SUSE Manager Server"
-else
-  product="SUSE Linux Enterprise Server"
-fi
+case $prod in
+  "SLED") product="SUSE Linux Enterprise Desktop";;
+  "Micro") product="SUSE Linux Enterprise Micro";;
+  "LTSS") product="SUSE Linux Enterprise Server LTSS";;
+  "LivePatch") product="SUSE Linux Enterprise Server Live Patching";;
+  "SUMA") product="SUSE Manager Server";;
+  *) product="SUSE Linux Enterprise Server";;
+esac
 
 # Define the Service Pack versions
-getsp=$(rmt-cli product list --all | egrep "$product\s+\|.*\s+$rel.*$arch" | awk -F '|' '{print $4}' | sort -u)
+getsp=$($rmtl | egrep "$product\s+\|.*\s+$rel.*$arch" | awk -F '|' '{print $4}' | sort -u)
 IFS=$'\n' read -d '' -r -a options <<< "$(echo "$getsp" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
 
 # Function to clear the screen
@@ -38,7 +35,7 @@ clear_screen() {
 
 # Display the menu
 show_menu() {
-  clear_screen
+#  clear_screen
   echo "Service Pack Options for $product $rel ($arch):"
   for ((i = 0; i < "${#options[@]}"; i++)); do
     echo "$((i + 1)). $product ${options[i]}"
@@ -54,10 +51,13 @@ handle_input() {
       selected_option="${options[choice - 1]}"
       if [ "$selected_option" == "15" ]; then
         echo "Selected: $product ${#options[i]} $arch"
-        rmt-cli products enable | egrep "$product\s+\|.*$selected_option.*$arch" | awk -F '| ' '{printf "%s ",$2}'
+	$rmtl | egrep "$product\s+\|.*$selected_option.*$arch" | awk -F '| ' '{printf "%s ",$2}' | xargs -I {} $rmte {}
       else
         echo "Selected: $product $selected_option $arch"
-        rmt-cli products enable | egrep "$product\s+\|.*$selected_option.*$arch" | awk -F '| ' '{printf "%s ",$2}'
+	$rmtl | egrep "$product\s+\|.*$selected_option.*$arch" | awk -F '| ' '{printf "%s ",$2}' | xargs -I {} $rmte {}
+	jq -r ".[\"$product\"][\"$rel\"][\"default\"][]" modules.json | while read line; do
+          $rmtl | egrep "$line\s+\|.*$selected_option.*$arch" | awk -F '| ' '{printf "%s ",$2}' | xargs -I {} $rmte {}
+        done
       fi
       ;;
     q)
