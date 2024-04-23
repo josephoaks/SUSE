@@ -90,7 +90,8 @@ def get_channels():
             channels = [line.strip() for line in file if line.strip()]
     else:
         client, key = create_client()
-        channels = client.channel.listVendorChannels(key)
+        channel_data = client.channel.listVendorChannels(key)
+        channels = [channel['label'] for channel in channel_data if 'label' in channel]
     return channels
 
 # Initialize directories and logging
