@@ -23,8 +23,15 @@
 #        directory as this script. Requires rsync, SSH access, and permissions
 #        to read the specified directories.
 
-script_dir="$(dirname "$0")"
-yaml_file="${script_dir}/rgsimportexport.yaml"
+# Change the directory where the script resides for cron execution
+cd "$(dirname "$0")" || exit 1
+
+# Set variables
+yaml_file="./rgsimportexport.yaml"
+if [ ! -f "$yaml_file" ]; then
+    echo "Configuration file not found: $yaml_file"
+    exit 1
+fi
 host=$(awk '/^host:/ { print $2 }' "$yaml_file")
 pass=$(awk '/^pass:/ { print $2 }' "$yaml_file")
 uname='rgsimportexport'
