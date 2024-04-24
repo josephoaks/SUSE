@@ -38,6 +38,7 @@ uname='rgsimportexport'
 basedir='/mnt/import'
 log_dir="/mnt/logs"
 log_file="${log_dir}/$(date +"%Y-%m-%d")-import.log"
+rsync_log="${log_dir}/$(date +"%Y-%m-%d")-rsync.log"
 
 if [ ! -d "$log_dir" ]; then
   mkdir -p "$log_dir"
@@ -55,7 +56,7 @@ rm -rf "$basedir"/initial/*
 ssh_user='rsyncuser'
 ssh_key="id_rsa"
 ssh_options="-i /home/${ssh_user}/.ssh/${ssh_key}"
-rsync -avP -e "ssh ${ssh_options}" "${ssh_user}@${host}":/ "$basedir"
+rsync -avP -e "ssh ${ssh_options}" "${ssh_user}@${host}":/ "$basedir" >> "$rsync_log" 2>&1
 
 process_directory() {
   if [ -z "$(find "$1" -mindepth 1 -type d -print -quit)" ]; then
