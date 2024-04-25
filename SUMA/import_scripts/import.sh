@@ -49,14 +49,14 @@ log() {
 }
 
 # Clear source directory before rsync of new data.
-rm -rf "$basedir"/updates/*
-rm -rf "$basedir"/initial/*
+#rm -rf "$basedir"/updates/*
+#rm -rf "$basedir"/initial/*
 
 # SSH Configuration variables.
 ssh_user='rsyncuser'
 ssh_key="id_rsa"
 ssh_options="-i /home/${ssh_user}/.ssh/${ssh_key}"
-rsync -avP -e "ssh ${ssh_options}" "${ssh_user}@${host}":/ "$basedir" >> "$rsync_log" 2>&1
+#rsync -avP -e "ssh ${ssh_options}" "${ssh_user}@${host}":/ "$basedir" >> "$rsync_log" 2>&1
 
 process_directory() {
   if [ -z "$(find "$1" -mindepth 1 -type d -print -quit)" ]; then
@@ -64,14 +64,29 @@ process_directory() {
     log "No imports at this time for $dir_name."
     return
   fi
-  
+
   local options="--xmlRpcUser=$uname --xmlRpcPassword=$pass --logLevel=error"
-  for dir in "$1"/*; do
-    if [ -d "$dir" ]; then
-      inter-server-sync import --importDir="$dir" $options >> "$log_file" 2>&1
-      log "Import for directory $dir completed."
+  if [ "$1" == "$basedir/initial" ]; then
+    local channels_file="$basedir/scripts/channels.txt"
+    if [ -f "$channels_file" ]; then
+      while IFS= read -r channel; do
+	channel=$(echo "$channel" | xargs)
+        if [ -d "$1/$channel" ]; then
+          inter-server-sync import --importDir="$1/$channel" $options >> "$log_file" 2>&1
+          log "Import for directory $1/$channel completed."
+        fi
+      done < "$channels_file"
+    else
+      log "Channel list not found at $channels_file"
     fi
-  done
+  else
+    for dir in "$1"/*; do
+      if [ -d "$dir" ]; then
+        inter-server-sync import --importDir="$dir" $options >> "$log_file" 2>&1
+        log "Import for directory $dir completed."
+      fi
+    done
+  fi
 }
 
 process_directory "$basedir/updates"
