@@ -124,9 +124,9 @@ enabled=1
 autorefresh=0
 baseurl=http://localhost/repos/custom/
 gpgcheck=0
-Refresh repos:
 ```
 
+Refresh repos:
 ```bash
 zypper ref
 ```
