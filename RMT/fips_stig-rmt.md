@@ -98,7 +98,7 @@ chmod -R 755 /srv/www/htdocs/repos
 Edit /etc/nginx/nginx.conf and confirm this location block exists:
 ```bash
 location ^~ /repos/ {
-    root /srv/www/htdocs;
+    root /srv/www/htdocs/;
     autoindex on;
 }
 ```
