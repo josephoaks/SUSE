@@ -171,6 +171,12 @@ password <user_name>
 
 Review the OpenSCAP HTML report (/tmp/ssg-report.html) and attach to compliance documentation.
 
+### Reboot 
+
+```bash
+reboot
+```
+
 ## Conclusion
 This guide provides:
 
