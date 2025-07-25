@@ -53,32 +53,25 @@ cat /proc/sys/crypto/fips_enabled
 ```
 Should return: 1
 
-## 3. Disconnected RMT (Repository Mirroring Tool) Setup
-This step prepares the system for updates in an air‑gapped environment.
+## 3. RMT (Repository Mirroring Tool) Setup
+This step prepares the system for updates.
 
-### 3.1 Configure Offline RMT Server
-```bash
-vi /etc/rmt.conf
-```
+### 3.1 Configure RMT Server
+Run `yast` and got to `Network Services` -> `RMT Configuration`
 
-Set:
-```bash
-SYNC_ENABLED=false
-```
+* input organization credentials
+* complete setup with passwords for the database and ssl certificate
 
-### 3.2 (On an Internet‑Connected System)
+When done exit `yast` and finish the setup of the repos
+
+### 3.2 Enable products for mirroring
 ```bash
 rmt-cli sync
+rmt-cli products list --all | grep -i micro | grep 5.3
+rmt-cli products enable <product id>
 rmt-cli mirror
-rmt-cli export -d /mnt/usb/rmt-export
 ```
-Transfer the export directory (/mnt/usb/rmt-export) to the offline RMT server.
 
-### 3.3 (On Offline Server)
-```bash
-rmt-cli import -d /mnt/usb/rmt-export
-systemctl enable --now rmt-server
-```
 RMT will serve SUSE repositories at:
 ```bash
 http://<server-ip>/repo/
@@ -86,7 +79,8 @@ http://<server-ip>/repo/
 
 ## 4. Custom Local Repository Setup
 
-### 4.1 Create Repository Structure
+### 4.1 Create Repository Structure and copy custom rpms into the newly create repo
+
 ```bash
 mkdir -p /srv/www/htdocs/repos/custom/
 cp /path/to/*.rpm /srv/www/htdocs/repos/custom/
