@@ -162,6 +162,13 @@ Verify custom repo access:
 ```bash
 zypper se <package-name>
 ```
+## *** CRITICAL ***
+
+Reset user passwords
+```bash
+password <user_name>
+```
+
 Review the OpenSCAP HTML report (/tmp/ssg-report.html) and attach to compliance documentation.
 
 ## Conclusion
