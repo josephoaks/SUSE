@@ -177,6 +177,20 @@ Review the OpenSCAP HTML report (/tmp/ssg-report.html) and attach to compliance 
 reboot
 ```
 
+### 7. Cleanup
+
+Deregister from the SCC
+```bash
+SUSEConnect -d;SUSEConnect --clean-up
+```
+
+Edit the `/etc/rmt.conf`
+```bash
+scc:
+  username:
+  password:
+```
+
 ## Conclusion
 This guide provides:
 
