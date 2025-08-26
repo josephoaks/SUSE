@@ -28,8 +28,10 @@
    transactional-update
    reboot
    ```
-   
-6. Edit hosts for MLM
+
+## MLM Setup and Configuration
+
+1. Edit hosts for MLM
    ```
    transactional-update shell
    vim /etc/hosts # Add local entry for MLM <ip> <fqdn> <short_name>
@@ -37,7 +39,7 @@
    reboot
    ```
 
-7. Enable and Verify FIPS
+2. Enable and Verify FIPS
    ```
    transactional-update shell
    vim /etc/default/grub
@@ -51,7 +53,7 @@
    # Output should be "1"
    ```
 
-8. Install MLM Podman
+3. Install MLM Podman
    ```
    mgradm install podman <fqdn> # This is the fqdn set in the /etc/hosts
 
@@ -79,7 +81,7 @@
    mgradm restart 
    ```
 
-9. Log into the WebUI and configure MLM
+4. Log into the WebUI and configure MLM
    ```
    https://<fqdn>
    ```
