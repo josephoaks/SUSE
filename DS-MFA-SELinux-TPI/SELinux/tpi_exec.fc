@@ -1,0 +1,4 @@
+/usr/local/sbin/tpi_exec         --      system_u:object_r:tpi_exec_exec_t:s0
+/usr/sbin/dsconf                 --      system_u:object_r:dsconf_exec_t:s0
+/usr/sbin/dsctl                  --      system_u:object_r:dsctl_exec_t:s0
+/usr/sbin/ns-slapd               --      system_u:object_r:ns_slapd_exec_t:s0
