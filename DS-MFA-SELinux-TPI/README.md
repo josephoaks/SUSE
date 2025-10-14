@@ -65,6 +65,5 @@ tpi-enforcement/
 └── docs/
     ├── DS_Setup.md
     ├── MFA_Integration.md
-    ├── SELinux_Policy.md
-    └── TPI_Framework.md
+    └── SELinux_Policy.md
 </pre>
