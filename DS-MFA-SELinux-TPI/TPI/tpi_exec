@@ -1,0 +1,28 @@
+#!/bin/bash
+# /usr/local/sbin/tpi_exec - Enforce Two-Person Integrity for critical operations
+
+CMD="$@"
+LOCKFILE="/var/lock/tpi_action.lock"
+TIMEOUT=300  # seconds
+
+timestamp() { date '+%Y-%m-%d %H:%M:%S'; }
+
+if [ -f "$LOCKFILE" ]; then
+    echo "[TPI] $(timestamp): Second authorization detected. Executing: $CMD"
+    rm -f "$LOCKFILE"
+    exec $CMD
+else
+    echo "[TPI] $(timestamp): First approver recorded for '$CMD'"
+    echo "Run again within $TIMEOUT seconds (by another authorized user) to execute."
+    echo "Lock file: $LOCKFILE"
+    echo "$USER $(timestamp)" > "$LOCKFILE"
+    chmod 600 "$LOCKFILE"
+    (
+      sleep $TIMEOUT
+      if [ -f "$LOCKFILE" ]; then
+          rm -f "$LOCKFILE"
+          echo "[TPI] Timeout expired for $CMD"
+      fi
+    ) & disown
+    exit 0
+fi
