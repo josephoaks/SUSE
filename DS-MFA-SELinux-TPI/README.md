@@ -40,30 +40,3 @@ This stack ensures that no single operator can perform critical infrastructure c
 │  - /var/log/tpi_exec.log auditing                              │
 └────────────────────────────────────────────────────────────────┘
 </pre>
-
-## Repository Layout
-
-<pre>
-tpi-enforcement/
-├── README.md                    ← main documentation
-├── mfa/
-│   ├── yubikey/
-│   │   ├── pam_u2f_setup.md
-│   │   ├── example_u2f_keys
-│   │   └── ssh_fido2_integration.md
-│   └── sso/
-│       ├── okta_oidc_setup.md
-│       ├── keycloak_saml_setup.md
-│       └── ipa_integration.md
-├── tpi/
-│   ├── tpi_exec
-│   ├── tpi_exec.te
-│   ├── tpi_exec.fc
-│   ├── tpi_exec.if
-│   ├── sudoers.d_tpi_exec
-│   └── Makefile
-└── docs/
-    ├── DS_Setup.md
-    ├── MFA_Integration.md
-    └── SELinux_Policy.md
-</pre>
