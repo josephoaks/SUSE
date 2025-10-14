@@ -46,11 +46,6 @@ This stack ensures that no single operator can perform critical infrastructure c
 <pre>
 tpi-enforcement/
 ├── README.md                    ← main documentation
-├── ds/
-│   ├── 01_install_ds.sh         ← install & initialize DS
-│   ├── 02_configure_schema.ldif ← group/role definitions
-│   ├── 03_seed_users.ldif       ← example admins
-│   └── 04_enable_ssl.sh         ← TLS/LDAPS setup
 ├── mfa/
 │   ├── yubikey/
 │   │   ├── pam_u2f_setup.md
