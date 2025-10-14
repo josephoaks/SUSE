@@ -14,3 +14,62 @@ This stack ensures that no single operator can perform critical infrastructure c
 1. being authenticated via MFA/SSO, and
 
 2. having a second authorized approver confirm the action.
+
+## System Architecture
+
+<pre>
+┌────────────────────────────────────────────────────────────────┐
+│                          Users / Admins                        │
+│  MFA via YubiKey, Okta, or SSO (OIDC/SAML)                     │
+└────────────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+┌────────────────────────────────────────────────────────────────┐
+│                   389 Directory Server (DS)                    │
+│  - BaseDN: dc=example,dc=com                                   │
+│  - Group: cn=Security-Officers,ou=Groups,dc=example,dc=com     │
+│  - LDAP users: admin01, admin02, ...                           │
+└────────────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+┌────────────────────────────────────────────────────────────────┐
+│                Host Enforcement Layer (target host)            │
+│  - /usr/local/sbin/tpi_exec wrapper                            │
+│  - /etc/sudoers.d/tpi_exec whitelist                           │
+│  - SELinux module tpi_exec.pp                                  │
+│  - /var/log/tpi_exec.log auditing                              │
+└────────────────────────────────────────────────────────────────┘
+</pre>
+
+## Repository Layout
+
+<pre>
+tpi-enforcement/
+├── README.md                    ← main documentation
+├── ds/
+│   ├── 01_install_ds.sh         ← install & initialize DS
+│   ├── 02_configure_schema.ldif ← group/role definitions
+│   ├── 03_seed_users.ldif       ← example admins
+│   └── 04_enable_ssl.sh         ← TLS/LDAPS setup
+├── mfa/
+│   ├── yubikey/
+│   │   ├── pam_u2f_setup.md
+│   │   ├── example_u2f_keys
+│   │   └── ssh_fido2_integration.md
+│   └── sso/
+│       ├── okta_oidc_setup.md
+│       ├── keycloak_saml_setup.md
+│       └── ipa_integration.md
+├── tpi/
+│   ├── tpi_exec
+│   ├── tpi_exec.te
+│   ├── tpi_exec.fc
+│   ├── tpi_exec.if
+│   ├── sudoers.d_tpi_exec
+│   └── Makefile
+└── docs/
+    ├── DS_Setup.md
+    ├── MFA_Integration.md
+    ├── SELinux_Policy.md
+    └── TPI_Framework.md
+</pre>
