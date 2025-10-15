@@ -40,3 +40,7 @@ This stack ensures that no single operator can perform critical infrastructure c
 │  - /var/log/tpi_exec.log auditing                              │
 └────────────────────────────────────────────────────────────────┘
 </pre>
+
+## Installation Script
+
+ds_tpi_setup.sh
