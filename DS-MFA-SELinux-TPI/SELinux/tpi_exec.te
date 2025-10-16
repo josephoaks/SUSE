@@ -1,42 +1,23 @@
+# TPI SELinux policy
+# File location: "/usr/share/selinux/packages/tpi_exec"
+
 module tpi_exec 1.0;
 
 require {
-    type user_t;
-    type systemctl_exec_t;
-    type dsconf_exec_t;
-    type dsctl_exec_t;
-    type ns_slapd_exec_t;
     type bin_t;
-    type usr_sbin_t;
-    type var_log_t;
-    class file { execute open read getattr append };
-    class process transition;
+    class file { read open execute getattr append };
+    class process { transition };
 }
 
-# Define our new domain types
+# Define a new domain and executable type
 type tpi_exec_t;
 type tpi_exec_exec_t;
 
-# Declare this as an application domain
-application_domain(tpi_exec_t)
+# Mark the executable type as a file type so it can be labeled and executed
 files_type(tpi_exec_exec_t)
 
-# Transition rule: entering tpi_exec from user_t
-domain_auto_trans(user_t, tpi_exec_exec_t, tpi_exec_t)
+# Allow processes in tpi_exec_t to execute the binary labeled tpi_exec_exec_t
+allow tpi_exec_t tpi_exec_exec_t:file { read open execute getattr append };
 
-# Allow tpi_exec_t to execute necessary admin tools
-allow tpi_exec_t systemctl_exec_t:file { read open execute getattr };
-allow tpi_exec_t dsconf_exec_t:file { read open execute getattr };
-allow tpi_exec_t dsctl_exec_t:file  { read open execute getattr };
-allow tpi_exec_t ns_slapd_exec_t:file { read open execute getattr };
-
-# Allow general /usr/sbin and /bin tools for shell utilities
-allow tpi_exec_t usr_sbin_t:file { read open execute getattr };
-allow tpi_exec_t bin_t:file { read open execute getattr };
-
-# Allow logging into /var/log/tpi_exec.log
-allow tpi_exec_t var_log_t:file { append open getattr };
-
-# Core command execution
-corecmd_exec_bin(tpi_exec_t)
-corecmd_exec_shell(tpi_exec_t)
+# Minimal self-transition (allows tpi_exec_t to spawn itself safely)
+allow tpi_exec_t self:process transition;
