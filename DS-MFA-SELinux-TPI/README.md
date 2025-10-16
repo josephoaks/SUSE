@@ -43,4 +43,8 @@ This stack ensures that no single operator can perform critical infrastructure c
 
 ## Installation Script
 
-ds_tpi_setup.sh
+Create the `tpi_exec` SELinux policy directory (see the SELinux README.md)
+
+Copy and execute this script on your target server.
+
+`ds_tpi_setup.sh`
