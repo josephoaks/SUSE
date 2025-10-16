@@ -105,30 +105,29 @@ EOF
 chmod 440 /etc/sudoers.d/tpi_exec
 
 # --- SELinux policy ----------------------------------------------------------
-echo -e "${G}Installing SELinux policy for tpi_exec...${Z}"
-cat >/tmp/tpi_exec.te <<'TE'
-module tpi_exec 1.0;
+echo -e "${G}Checking for external SELinux policy...${Z}"
+SELINUX_POLICY_DIR="/usr/share/selinux/packages/tpi_exec"
+SELINUX_TE="${SELINUX_POLICY_DIR}/tpi_exec.te"
+SELINUX_FC="${SELINUX_POLICY_DIR}/tpi_exec.fc"
 
-require {
-    class file { read open execute getattr append };
-}
+if command -v checkmodule >/dev/null 2>&1 && [ -f "$SELINUX_TE" ]; then
+    echo "[INFO] Found policy files: $SELINUX_TE and (optional) $SELINUX_FC"
+    TMPMOD="/tmp/tpi_exec.mod"
+    TMPPKG="/tmp/tpi_exec.pp"
 
-# Define simple SELinux types
-type tpi_exec_t;
-type tpi_exec_exec_t;
+    checkmodule -M -m -o "$TMPMOD" "$SELINUX_TE"
+    if [ -f "$SELINUX_FC" ]; then
+        semodule_package -o "$TMPPKG" -m "$TMPMOD" -f "$SELINUX_FC"
+    else
+        semodule_package -o "$TMPPKG" -m "$TMPMOD"
+    fi
 
-# Allow the binary to be executed and read
-allow tpi_exec_t tpi_exec_exec_t:file { read open execute getattr append };
-TE
-
-checkmodule -M -m -o /tmp/tpi_exec.mod /tmp/tpi_exec.te
-semodule_package -o /tmp/tpi_exec.pp -m /tmp/tpi_exec.mod
-semodule -i /tmp/tpi_exec.pp
-
-# Label the wrapper binary (using a neutral existing type fallback)
-semanage fcontext -a -t bin_t "/usr/bin/tpi_exec"
-restorecon -v /usr/bin/tpi_exec
-
+    semodule -i "$TMPPKG"
+    restorecon -v /usr/bin/tpi_exec
+    echo "[OK] SELinux policy applied successfully."
+else
+    echo "[WARN] SELinux tools or policy files missing. Skipping SELinux policy install."
+fi
 
 # --- Verification ------------------------------------------------------------
 echo -e "${Y}Verification:${Z}"
