@@ -46,7 +46,3 @@ New to the container model? Start with [Concepts](01-concepts.md), then keep the
 | Replace the self-signed certificate | [Certificates](10-certificates.md) |
 | Apply updates or move from 5.1 to 5.2 | [Updating and Upgrading](11-updates-and-upgrades.md) |
 | Set up or update a proxy | [Proxy](09-proxy.md) |
-
-## Sources
-
-SUSE MLM 5.1/5.2 documentation: Backup and Restore; Database Backup Management; Starting and Stopping Containers; Containers Used by MLM; Persistent Container Volumes; Server Maintenance Update; Server Upgrade 5.1 → 5.2; Proxy Upgrade 5.1 → 5.2; Using mgr-sync; Synchronization CLI Tools; Third-party Channels; Support; spacecmd Reference; Import SSL Certificates; Migrate SSL Certificate Authorities; Proxy Deployment; Troubleshooting Taskomatic; Generate Reports. SUSE maintenance announcements for 5.1.1–5.1.3. uyuni-tools source and changelog. Command output from an MLM 5.1.3.1 server.
